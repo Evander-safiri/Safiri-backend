@@ -1,0 +1,13 @@
+const express=require('express');
+const cors=require('cors');
+require('dotenv').config();
+const connectDB=require('./config/db');
+const app=express();
+connectDB();
+app.use(cors());
+app.use(express.json());
+app.use('/api/rides',require('./routes/rides'));
+app.use('/api/wallet',require('./routes/wallet'));
+app.get('/',(req,res)=>res.send('Safiri API Running'));
+const PORT=process.env.PORT||3000;
+app.listen(PORT,()=>console.log('Server running'));
